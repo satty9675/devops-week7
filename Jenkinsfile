@@ -36,15 +36,17 @@ podTemplate(yaml: '''
               path: config.json
 ''') {
   node(POD_LABEL) {
-    withEnv(['container=docker']) {
+    //withEnv(['container=docker']) {
     stage('Build a gradle project') {
-      git 'https://github.com/satty9675/devops-week7.git'
+      sh 'git clone https://github.com/satty9675/devops-week7.git'
       container('gradle') {
         stage('Build a gradle project') {
           echo "container Value ${env.container}"
           sh '''
                     pwd
-		    ls	
+		    ls
+	            cd devops-week7
+		    ls			
                     chmod +x gradlew
                     ./gradlew build
                     mv ./build/libs/calculator-0.0.1-SNAPSHOT.jar /mnt
@@ -62,11 +64,11 @@ podTemplate(yaml: '''
             echo 'ENTRYPOINT ["java", "-jar", "app.jar"]' >> Dockerfile
             ls /mnt/*jar
             mv /mnt/calculator-0.0.1-SNAPSHOT.jar .
-            /kaniko/executor --context `pwd` --destination sathish/hello-kaniko:1.0
+            /kaniko/executor --force --context `pwd` --destination sathish/hello-kaniko:1.1
           '''
         }
       }
     }
-    }
+    //}
   }
 }
