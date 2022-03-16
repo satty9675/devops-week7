@@ -81,11 +81,15 @@ podTemplate(yaml: '''
 	try{
            if (env.BRANCH_NAME == "feature") {
 	     echo "RUNNING packing kaniko container for ${env.BRANCH_NAME} branch"
-	     sh /kaniko/executor --force --context `pwd` --destination techfruity/calculator-feature:0.1
+	     sh '''
+		/kaniko/executor --force --context `pwd` --destination techfruity/calculator-feature:0.1
+	     '''
 	   }
 	   if (env.BRANCH_NAME == "main") {
+		sh '''
 		echo "RUNNING packing kaniko container for ${env.BRANCH_NAME} branch"
-              sh /kaniko/executor --force --context `pwd` --destination techfruity/calculator:1.0
+               /kaniko/executor --force --context `pwd` --destination techfruity/calculator:1.0
+	       '''
            }else{
 		echo "SKIPPING packing kaniko container for ${env.BRANCH_NAME} branch"
 	   }
