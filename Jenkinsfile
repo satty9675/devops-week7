@@ -43,9 +43,12 @@ podTemplate(yaml: '''
         stage('Build a gradle project') {
           echo "container Value ${env.container}"
           sh '''
-                    pwd
-	            cd devops-week7
-                    '''
+          pwd
+	  cd devops-week7
+	  chmod +x gradlew
+          ./gradlew build
+	  mv ./build/libs/calculator-0.0.1-SNAPSHOT.jar /mnt	
+          '''
         }
       }
     }
