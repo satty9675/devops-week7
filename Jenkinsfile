@@ -57,6 +57,14 @@ podTemplate(yaml: '''
 	 echo "SKIPPING TEST for ${env.BRANCH_NAME} branch"
 	}	
     }
+    stage('Code Coverage'){
+         echo 'Running Code Coverage Stage'
+         if (env.BRANCH_NAME != "feature") {
+         echo "RUNNING Code Coverage for ${env.BRANCH_NAME} branch"
+        }else{
+         echo "SKIPPING Code Coverage for ${env.BRANCH_NAME} branch"
+        }
+    i}
     stage('Build Java Image') {
       container('kaniko') {
         stage('Build a Go project') {
