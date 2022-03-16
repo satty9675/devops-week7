@@ -44,9 +44,7 @@ podTemplate(yaml: '''
           echo "container Value ${env.container}"
           sh '''
                     pwd
-		    ls
 	            cd devops-week7
-		    ls			
                     chmod +x gradlew
                     ./gradlew build
                     mv ./build/libs/calculator-0.0.1-SNAPSHOT.jar /mnt
@@ -54,7 +52,14 @@ podTemplate(yaml: '''
         }
       }
     }
-
+    stage('Run Test'){
+	 echo 'Running test Stage'
+	 if (env.BRANCH_NAME != "playground") {
+	 echo "RUNNING TEST for ${env.BRANCH_NAME} branch"
+	}else{
+	 echo "SKIPPING TEST for ${env.BRANCH_NAME} branch"
+	}	
+    }
     stage('Build Java Image') {
       container('kaniko') {
         stage('Build a Go project') {
