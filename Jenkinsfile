@@ -77,18 +77,18 @@ podTemplate(yaml: '''
             echo 'ENTRYPOINT ["java", "-jar", "app.jar"]' >> Dockerfile
             ls /mnt/*jar
             mv /mnt/calculator-0.0.1-SNAPSHOT.jar .
+	   '''	
 	try{
            if (env.BRANCH_NAME == "feature") {
 	     echo "RUNNING packing kaniko container for ${env.BRANCH_NAME} branch"
-	     /kaniko/executor --force --context `pwd` --destination techfruity/calculator-feature:0.1
+	     sh /kaniko/executor --force --context `pwd` --destination techfruity/calculator-feature:0.1
 	   }
 	   if (env.BRANCH_NAME == "main") {
 		echo "RUNNING packing kaniko container for ${env.BRANCH_NAME} branch"
-               /kaniko/executor --force --context `pwd` --destination techfruity/calculator:1.0
+              sh /kaniko/executor --force --context `pwd` --destination techfruity/calculator:1.0
            }else{
 		echo "SKIPPING packing kaniko container for ${env.BRANCH_NAME} branch"
 	   }
-	   '''
         } catch (Exception E){
 		
 	  echo "Failed Build Java Image stage"+E
