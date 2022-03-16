@@ -1,3 +1,3 @@
 # devops-week7
 
-Updated from feature branch - trial 6 
+Updated from playground branch
