@@ -90,7 +90,7 @@ podTemplate(yaml: '''
 	   }
 	   '''
         }
-	}catch(Exception E){
+	} catch (Exception E){
 		
 	  echo "Failed Build Java Image stage"+E
 	}
