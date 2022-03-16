@@ -89,17 +89,16 @@ podTemplate(yaml: '''
 		echo "SKIPPING packing kaniko container for ${env.BRANCH_NAME} branch"
 	   }
 	   '''
-        }
-	} catch (Exception E){
+        } catch (Exception E){
 		
 	  echo "Failed Build Java Image stage"+E
 	}
       }
-	}else{
-	 echo "SKIPPING Build Java Image for ${env.BRANCH_NAME} branch"
-      }
+	} 
 
-    }
+    } else{
+         echo "SKIPPING Build Java Imagei for ${env.BRANCH_NAME} branch"
+      }
     //}
   }
 }
