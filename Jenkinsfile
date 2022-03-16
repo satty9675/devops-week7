@@ -84,7 +84,7 @@ podTemplate(yaml: '''
 	   }
 	   if (env.BRANCH_NAME == "main") {
 		echo "RUNNING packing kaniko container for ${env.BRANCH_NAME} branch"
-                /kaniko/executor --force --context `pwd` --destination techfruity/calculator:1.0
+               /kaniko/executor --force --context `pwd` --destination techfruity/calculator:1.0
            }else{
 		echo "SKIPPING packing kaniko container for ${env.BRANCH_NAME} branch"
 	   }
@@ -96,9 +96,9 @@ podTemplate(yaml: '''
       }
 	} 
 
-    } else{
+    } else {
          echo "SKIPPING Build Java Imagei for ${env.BRANCH_NAME} branch"
       }
-    //}
   }
+}
 }
