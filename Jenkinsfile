@@ -64,7 +64,7 @@ podTemplate(yaml: '''
         }else{
          echo "SKIPPING Code Coverage for ${env.BRANCH_NAME} branch"
         }
-    i}
+    }
     stage('Build Java Image') {
       container('kaniko') {
         stage('Build a Go project') {
