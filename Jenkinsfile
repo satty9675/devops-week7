@@ -89,9 +89,9 @@ podTemplate(yaml: '''
 	     '''
 	   }
 	   if (env.BRANCH_NAME == "main") {
-		sh '''
 		echo "RUNNING packing kaniko container for ${env.BRANCH_NAME} branch"
-               /kaniko/executor --force --context `pwd` --destination techfruity/calculator:1.0
+               sh '''
+		/kaniko/executor --force --context `pwd` --destination techfruity/calculator:1.0
 	       '''
            }else{
 		echo "SKIPPING packing kaniko container for ${env.BRANCH_NAME} branch"
