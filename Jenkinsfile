@@ -66,6 +66,9 @@ podTemplate(yaml: '''
         }
     }
     stage('Build Java Image') {
+     echo 'Running Build Java Image Stage'
+     if(env.BRANCH_NAME != "playground"){
+      echo "RUNNING Build Java Image for ${env.BRANCH_NAME} branch"
       container('kaniko') {
         stage('Build a Go project') {
           sh '''
@@ -78,6 +81,10 @@ podTemplate(yaml: '''
           '''
         }
       }
+	}else{
+	 echo "SKIPPING Build Java Image for ${env.BRANCH_NAME} branch"
+      }
+
     }
     //}
   }
